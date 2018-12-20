@@ -5,10 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Switch, Redirect, Route} from 'react-router';
 import {BrowserRouter, Link} from 'react-router-dom';
-import ItemEditForm from "./BookEditor/ItemEditForm";
-import NewItemForm from "./BookEditor/NewItemForm";
-import NewLibraryForm from "./InstitutionEditor/NewLibraryForm";
-import InstitutionDetails from "./InstitutionEditor/InstitutionDetails";
+import ItemEditForm from "./CountryEditor/ItemEditForm";
+import NewItemForm from "./CountryEditor/NewItemForm";
+import NewLibraryForm from "./HolidayEditor/NewLibraryForm";
+import InstitutionDetails from "./HolidayEditor/InstitutionDetails";
 
 
 var NoMatch = (props) => {

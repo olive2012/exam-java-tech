@@ -1,20 +1,18 @@
 import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
-import ItemList from "./BookEditor/ItemList";
-import Item from "./BookEditor/Item";
+import ItemList from "./CountryEditor/ItemList";
 import Notification from "./Notification/Notification";
 import Visual1 from "./Visual1/Visual1";
-import InstitutionList from "./InstitutionEditor/InstitutionList";
-import Actions from "./Actions/Actions";
+import InstitutionList from "./HolidayEditor/InstitutionList";
+
 
 // import {Doughnut} from 'react-chartjs-2';
 
 class App extends Component {
     state = {
-        books: [],
-        libraries: [],
-        bookshops: []
+        countries: [],
+        holidays: []
     }
 
     componentDidMount() {
@@ -22,43 +20,30 @@ class App extends Component {
     }
 
     refreshData = () => {
-        axios.get("/api/books")
+        axios.get("/api/country")
             .then(result => {
-                    this.setState({books: result.data})
+                    this.setState({counties: result.data})
                 }
             );
 
-        axios.get("/api/library")
-            .then(result => {
-                    this.setState({libraries: result.data})
-                }
-            );
 
-        axios.get("/api/bookshop")
+        axios.get("/api/holiday")
             .then(result => {
-                    this.setState({bookshops: result.data})
+                    this.setState({holidays: result.data})
                 }
             );
 
     }
 
-    deleteBook = (isbn) => {
-        axios.delete("api/books/" + isbn)
+    deleteCountry = (name) => {
+        axios.delete("api/country/" + name)
             .then(() => {
                 this.refreshData()
             })
     }
 
-    deleteBookShop = (code) => {
-        axios.delete("api/bookshop/" + code)
-            .then(() => {
-                this.refreshData()
-            })
-    }
-
-
-    deleteLibrary = (code) => {
-        axios.delete("api/library/" + code)
+    deleteHoliday = (title) => {
+        axios.delete("api/holiday/" + title)
             .then(() => {
                 this.refreshData()
             })
@@ -70,7 +55,7 @@ class App extends Component {
             <div className="App container-fluid p-3 m-1">
                 <div>
                     <div className="jumbotron jumbotron-fluid">
-                        <h1 className="display-4">Book institutions' administration service </h1>
+                        <h1 className="display-4">Holidays administration service </h1>
                         <p className="lead">Welcome.</p>
                     </div>
                 </div>
@@ -79,31 +64,21 @@ class App extends Component {
                 {/*<div className="row">*/}
                 {/*<div className="col-12 border border-success m-3">*/}
                 <InstitutionList
-                    libraries={this.state.libraries}
-                    bookshops={this.state.bookshops}
-                    deleteBookShopHandler={this.deleteBookShop}
-                    deleteLibraryHandler={this.deleteLibrary}/>
-                {/*</div>*/}
+                    holidays={this.state.holidays}
+                    deleteBookShopHandler={this.deleteHoliday}/>
 
-                {/*<div className="col-4 border border-success">*/}
-                {/*<Actions/>*/}
-
-                {/*</div>*/}
-
-
-                {/*</div>*/}
 
                 <div className="row pt-5">
-                    <h3>Book List</h3>
+                    <h3>Countries List</h3>
 
                     <div className="col-sm-12">
-                        <ItemList itemsToShow={this.state.books} deleteHandler={this.deleteBook}/>
+                        <ItemList itemsToShow={this.state.counties} deleteHandler={this.deleteCountry}/>
                     </div>
 
 
                 </div>
                 <div>
-                    <Visual1 books={this.state.books}/>
+                    <Visual1 countries={this.state.countries}/>
                 </div>
             </div>
 
